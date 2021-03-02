@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css.css">
+	<link rel="stylesheet" href="svg.svg">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div class="block">
+
+			<svg class="svg" width="500px" height="500px" viewBox="0 0 50 50">
+				<defs>
+					<linearGradient id="oval" x1="0%" y1="0%" x2="0%" y2="100%">
+						<stop id="stopOne" offset="0%" style="stop-color:rgb(97,2,144,1)" ></stop>
+						<stop id="stopTwo" offset="100%" style="stop-color:rgb(97,2,144,1)" >
+							<animate attributeName="stop-color" dur="15s" values="rgba(0,0,12,0);rgba(25,22,33,.3);rgba(32,32,44,.8);rgb(58,58,82);rgb(81,81,117);rgb(138,118,171);rgb(205,130,160);rgb(234,176,209);rgb(235,178,177);rgb(177,181,234);rgb(148,223,255);rgb(103,209,251);rgb(56,163,209);rgb(36,111,168);rgb(30,82,142);rgb(91,121,131);rgb(157,166,113);rgb(233,206,93);rgb(178,99,57);rgb(47,17,7);rgb(36,14,3);rgb(47,17,7);rgba(75,29,6,.4);rgba(21,8,0,0);rgba(0,0,12,0)" repeatCount="indefinite" />
+						</stop>
+					</linearGradient>
+				</defs>
+
+				<defs>
+					<filter id="f0" >
+					  <feGaussianBlur  in="SourceGraphic" stdDeviation="0.15" />
+					</filter>
+				 </defs>
+
+				 
+
+				<defs>
+					<linearGradient id="stroke" x1="0%" x2="0%" y1="0%" y2="100%">
+
+						<stop offset="0%" style="stop-color:rgba(0,252,182,1)"></stop>
+						<stop offset="100%" style="stop-color:rgba(121,0,0,1)"></stop>
+
+					</linearGradient>
+				</defs>
+
+				<defs>
+					<linearGradient id="text" x1="0%" y1="0%" x2="0%" y2="100%">
+						<stop offset="0%" style="stop-color:rgb(0,0,0,1)" />
+						<stop offset="100%" style="stop-color:rgb(144,2,24,1)" />
+					</linearGradient>
+				</defs>
+
+				<circle class="circle" cx="25" cy="25" r="15.915494309189533" stroke-dashoffset="25"
+					stroke-dasharray="30 70" stroke="url(#stroke)" transform="rotate(0deg)" stroke-width="1" fill="url(#oval)" filter="url(#f0)">
+					<animate attributeName="transform" dur="1s" values="rotate(90deg)" repeatCount="indefinite"></animate>
+				</circle>
+
+				<text id="text__svg" font-size="6" fill="url(#text)" y="27" x="21">0 %</text>
+			</svg>
+
+		</div>
+
+	</div>
+
+	<script>
+		const textSvg = document.querySelector('#text__svg')
+		const animate = document.querySelector('animate')
+		const circle = document.querySelector('circle')
+
+		circle.addEventListener("click", () => {
+			let value = textSvg.innerHTML[0] = "50"
+			let result = 100 - value
+
+			textSvg.innerHTML = value + "%"
+
+			circle.attributes["stroke-dasharray"].value = `${value} ${result}`
+		})
+
+		let count = 0
+		let value2 = 0
+		let countgradient = 0
+
+		let value = textSvg.innerHTML
+
+		let timer = setInterval(function () {
+			value = value2++
+			if (value <= 100) {
+				let result = 100 - value
+
+				textSvg.innerHTML = value + "%"
+
+				circle.attributes["stroke-dasharray"].value = `${value} ${result}`
+			}
+
+			else {
+				clearInterval(timer)
+			}
+
+		}, 1000)
+
+
+
+	</script>
+
+</body>
+
+</html>
